@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Movie</string>
+    <string name="movie_name">Название фильма</string>
+    <string name="movie">MOVIES</string>
+    <string name="download_movies">DOWNLOADED MOVIES</string>
+    <string name="series">Series</string>
+    <string name="episode">Episode</string>
+</resources>

@@ -1,0 +1,26 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/fragmentMovies">
+
+    <fragment
+        android:id="@+id/fragmentMovies"
+        android:name="com.github.movie.ui.movie.MovieFragment"
+        android:label="MovieFragment" >
+        <action
+            android:id="@+id/action_fragmentMovies_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDownloadedMovies"
+        android:name="com.github.movie.ui.downliaded_movies.FragmentDownloadedMovies"
+        android:label="FragmentDownloadedMovies" />
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.github.movie.ui.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
+</navigation>

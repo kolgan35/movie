@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fragmentMovies"
+        android:icon="@drawable/ic_movie"
+        android:title="@string/movie"/>
+
+    <item
+        android:id="@+id/fragmentDownloadedMovies"
+        android:icon="@drawable/ic_cloud_download"
+        android:title="@string/download_movies"/>
+
+</menu>
