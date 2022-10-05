@@ -11,7 +11,7 @@ import com.github.movie.utils.inflate
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate
 
 
-class MovieListAdapterDelegate() : AbsListItemAdapterDelegate<MovieData, MovieData, MovieListAdapterDelegate.Holder>(){
+class MovieListAdapterDelegate : AbsListItemAdapterDelegate<MovieData, MovieData, MovieListAdapterDelegate.Holder>(){
 
 
     override fun isForViewType(

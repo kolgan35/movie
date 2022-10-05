@@ -1,6 +1,7 @@
 package com.github.movie.utils
 
 
+import MovieDetailInfo
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import com.github.movie.R
 import com.github.movie.data.entity.MovieEntity
 import com.github.movie.data.models.MovieData
 import com.github.movie.data.models.MovieType
+import com.github.movie.data.models.RatingValue
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow
@@ -39,7 +41,7 @@ fun <T : ViewBinding> ViewGroup.inflate(
 }
 
 fun EditText.textChangedFlow(): Flow<String> {
-    return callbackFlow<String> {
+    return callbackFlow {
         val textChangedListener = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -107,4 +109,5 @@ fun MovieType.toString(movieType: MovieType): String = movieType.name
 fun <T: Fragment> T.toast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 }
+
 

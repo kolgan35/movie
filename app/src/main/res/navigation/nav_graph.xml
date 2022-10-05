@@ -20,7 +20,7 @@
         android:name="com.github.movie.ui.detail.DetailFragment"
         android:label="DetailFragment" >
         <argument
-            android:name="title"
+            android:name="id"
             app:argType="string" />
     </fragment>
 </navigation>

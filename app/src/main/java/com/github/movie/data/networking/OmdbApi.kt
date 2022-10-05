@@ -1,5 +1,6 @@
 package com.github.movie.data.networking
 
+import MovieDetailInfo
 import androidx.annotation.IntRange
 import com.github.movie.data.const.ApiConst
 import com.github.movie.data.models.Movie
@@ -14,4 +15,9 @@ interface OmdbApi {
         @Query("type") type: String = "movie",
         @Query("page") @IntRange(from = 1) page: Int = 1
     ): Movie
+
+    @GET(ApiConst.API_KEY)
+    suspend fun getDetailInfoByID(
+        @Query("i") id: String
+    ): MovieDetailInfo
 }

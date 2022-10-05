@@ -1,6 +1,5 @@
 package com.github.movie.paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.movie.data.database.MovieDatabase
@@ -51,18 +50,10 @@ class MoviePageSource(
                 nextKey = if (queryResponse.data.isNullOrEmpty()) null else pagePosition + 1
             )
         } catch (t: JsonDataException) {
-            LoadResult.Page(
-                data = emptyList(),
-                prevKey = null,
-                nextKey = null
-            )
+            emptyPage()
         } catch (exception: Exception) {
             if (query.isEmpty()) {
-                LoadResult.Page(
-                    data = emptyList(),
-                    prevKey = null,
-                    nextKey = null
-                )
+                emptyPage()
             } else {
                 val response =
                     db.movieDao().getMovieByTitleAndType(query, MovieType.valueOf(type))
@@ -73,7 +64,14 @@ class MoviePageSource(
                     nextKey = null
                 )
             }
-
         }
     }
+}
+
+private fun emptyPage(): PagingSource.LoadResult<Int, MovieData> {
+    return PagingSource.LoadResult.Page(
+        data = emptyList(),
+        prevKey = null,
+        nextKey = null
+    )
 }
