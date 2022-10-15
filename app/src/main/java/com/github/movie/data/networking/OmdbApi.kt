@@ -3,7 +3,7 @@ package com.github.movie.data.networking
 import MovieDetailInfo
 import androidx.annotation.IntRange
 import com.github.movie.data.const.ApiConst
-import com.github.movie.data.models.Movie
+import com.github.movie.domain.models.Movie
 import retrofit2.http.GET
 import retrofit2.http.Query
 

@@ -1,4 +1,4 @@
-package com.github.movie.domain
+package com.github.movie.domain.repository
 
 import MovieDetailInfo
 

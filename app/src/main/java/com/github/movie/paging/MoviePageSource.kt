@@ -3,9 +3,9 @@ package com.github.movie.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.github.movie.data.database.MovieDatabase
-import com.github.movie.data.models.Movie
-import com.github.movie.data.models.MovieData
-import com.github.movie.data.models.MovieType
+import com.github.movie.domain.models.Movie
+import com.github.movie.domain.models.MovieData
+import com.github.movie.domain.models.MovieType
 import com.github.movie.data.networking.OmdbApi
 import com.github.movie.utils.movieConvertDataToEntity
 import com.github.movie.utils.movieConverter

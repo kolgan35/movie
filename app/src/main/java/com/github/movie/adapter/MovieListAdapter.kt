@@ -1,7 +1,7 @@
 package com.github.movie.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.github.movie.data.models.MovieData
+import com.github.movie.domain.models.MovieData
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 
 

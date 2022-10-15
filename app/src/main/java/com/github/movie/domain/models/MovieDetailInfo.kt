@@ -1,5 +1,5 @@
 
-import com.github.movie.data.models.RatingValue
+import com.github.movie.domain.models.RatingValue
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

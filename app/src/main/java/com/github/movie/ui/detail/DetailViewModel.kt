@@ -1,16 +1,16 @@
 package com.github.movie.ui.detail
 
 import MovieDetailInfo
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.github.movie.data.models.RatingValue
-import com.github.movie.data.repository.DetailMovieInfoRepositoryImpl
+import androidx.lifecycle.ViewModel
+import com.github.movie.domain.models.RatingValue
+import com.github.movie.domain.repository.DetailMovieInfoRepository
 import com.github.movie.utils.SingleLiveEvent
 
-class DetailViewModel(application: Application) : AndroidViewModel(application) {
+class DetailViewModel(
+    private val repo: DetailMovieInfoRepository
+) : ViewModel() {
 
-    private val repo = DetailMovieInfoRepositoryImpl()
     private val toastSingleLiveEvent = SingleLiveEvent<String>()
 
     val toastLiveEvent: LiveData<String>

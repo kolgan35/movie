@@ -1,7 +1,7 @@
-package com.github.movie.domain
+package com.github.movie.domain.repository
 
 import com.github.movie.data.entity.MovieEntity
-import com.github.movie.data.models.MovieData
+import com.github.movie.domain.models.MovieData
 import kotlinx.coroutines.flow.Flow
 
 

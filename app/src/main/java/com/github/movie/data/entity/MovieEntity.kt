@@ -1,7 +1,7 @@
 package com.github.movie.data.entity
 
 import androidx.room.*
-import com.github.movie.data.models.MovieType
+import com.github.movie.domain.models.MovieType
 
 @Entity(tableName = MovieContract.TABLE_NAME)
 @TypeConverters(

@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.github.movie.data.entity.MovieContract
 import com.github.movie.data.entity.MovieEntity
-import com.github.movie.data.models.MovieType
+import com.github.movie.domain.models.MovieType
 import kotlinx.coroutines.flow.Flow
 
 @Dao

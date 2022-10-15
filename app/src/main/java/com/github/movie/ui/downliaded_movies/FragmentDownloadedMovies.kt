@@ -1,6 +1,7 @@
 package com.github.movie.ui.downliaded_movies
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,13 +16,14 @@ import timber.log.Timber
 
 class FragmentDownloadedMovies : Fragment(R.layout.fragment_downloaded_movies) {
 
-    private val viewModel: DownloadedMoviesViewModel by viewModels()
+    private val viewModel: DownloadedMoviesViewModel by viewModels {DownloadedMovieViewModelFactory()}
     private var movieAdapter: MovieListAdapter by autoCleared()
     private val binding: FragmentDownloadedMoviesBinding by viewBinding(
         FragmentDownloadedMoviesBinding::bind
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("AAA", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         initList()
         viewModel.movieLiveData.observe(viewLifecycleOwner) {
@@ -30,6 +32,9 @@ class FragmentDownloadedMovies : Fragment(R.layout.fragment_downloaded_movies) {
 
         Timber.d(movieAdapter.itemCount.toString())
 
+        binding.upButton.setOnClickListener {
+            binding.rv.smoothScrollToPosition(0)
+        }
     }
 
     private fun initList() {

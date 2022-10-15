@@ -5,7 +5,7 @@ import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.github.movie.R
-import com.github.movie.data.models.MovieData
+import com.github.movie.domain.models.MovieData
 import com.github.movie.databinding.ItemMovieBinding
 import com.github.movie.utils.inflate
 import com.hannesdorfmann.adapterdelegates4.AbsListItemAdapterDelegate

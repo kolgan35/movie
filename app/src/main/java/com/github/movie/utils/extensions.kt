@@ -1,7 +1,6 @@
 package com.github.movie.utils
 
 
-import MovieDetailInfo
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -15,9 +14,8 @@ import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.github.movie.R
 import com.github.movie.data.entity.MovieEntity
-import com.github.movie.data.models.MovieData
-import com.github.movie.data.models.MovieType
-import com.github.movie.data.models.RatingValue
+import com.github.movie.domain.models.MovieData
+import com.github.movie.domain.models.MovieType
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.channels.trySendBlocking
 import kotlinx.coroutines.flow.Flow

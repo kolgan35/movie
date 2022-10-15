@@ -2,8 +2,8 @@ package com.github.movie.data.repository
 
 import com.github.movie.data.database.Database
 import com.github.movie.data.entity.MovieEntity
-import com.github.movie.data.models.MovieData
-import com.github.movie.domain.MovieRepository
+import com.github.movie.domain.models.MovieData
+import com.github.movie.domain.repository.MovieRepository
 import com.github.movie.utils.movieConverter
 import kotlinx.coroutines.flow.Flow
 

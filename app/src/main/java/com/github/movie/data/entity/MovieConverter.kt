@@ -1,8 +1,8 @@
 package com.github.movie.data.entity
 
 import androidx.room.TypeConverter
-import com.github.movie.data.models.MovieData
-import com.github.movie.data.models.MovieType
+import com.github.movie.domain.models.MovieData
+import com.github.movie.domain.models.MovieType
 
 class MovieConverter {
 

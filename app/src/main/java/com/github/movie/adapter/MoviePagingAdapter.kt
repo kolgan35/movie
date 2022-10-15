@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.github.movie.R
-import com.github.movie.data.models.MovieData
+import com.github.movie.domain.models.MovieData
 import com.github.movie.databinding.ItemMovieBinding
 
 class MoviePagingAdapter(context: Context, private val listener: OnItemClickListenr) :

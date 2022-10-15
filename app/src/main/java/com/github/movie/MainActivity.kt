@@ -21,4 +21,5 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
         navView.setupWithNavController(navController)
     }
+
 }

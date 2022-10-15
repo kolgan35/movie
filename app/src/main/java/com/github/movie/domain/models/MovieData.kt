@@ -1,4 +1,4 @@
-package com.github.movie.data.models
+package com.github.movie.domain.models
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
