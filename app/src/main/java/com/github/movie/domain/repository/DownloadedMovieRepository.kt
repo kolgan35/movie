@@ -6,9 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 
 
-interface MovieRepository {
+interface DownloadedMovieRepository {
 
     suspend fun getAllMovies(): List<MovieData>
-
     fun listenerMovie(): Flow<List<MovieEntity>>
+
 }

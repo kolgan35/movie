@@ -20,7 +20,10 @@ class MoviePagingAdapter(context: Context, private val listener: OnItemClickList
     private val layoutInflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviePagingViewHolder {
-        return MoviePagingViewHolder(layoutInflater.inflate(R.layout.item_movie, parent, false))
+        return MoviePagingViewHolder(
+            layoutInflater.inflate(R.layout.item_movie, parent, false),
+            listener
+        )
     }
 
     override fun onBindViewHolder(holder: MoviePagingViewHolder, position: Int) {
@@ -30,25 +33,29 @@ class MoviePagingAdapter(context: Context, private val listener: OnItemClickList
 
     inner class MoviePagingViewHolder(
         itemView: View,
+        listener: OnItemClickListenr
     ) : RecyclerView.ViewHolder(itemView) {
 
         private val binding by viewBinding(ItemMovieBinding::bind)
 
         init {
-            binding.root.setOnClickListener {
-                val position = bindingAdapterPosition
-                if (position != RecyclerView.NO_POSITION) {
-                    val item = getItem(position)
-                    if (item != null) {
-                        listener.onItemClick(item)
-                    }
-
-                }
+//            binding.root.setOnClickListener {
+//                val position = bindingAdapterPosition
+//                if (position != RecyclerView.NO_POSITION) {
+//                    val item = getItem(position)
+//                    if (item != null) {
+//                        listener.onItemClick(item)
+//                    }
+//
+//                }
+//            }
+            binding.run {
+                this.listener = listener
             }
         }
 
         fun bind(item: MovieData) {
-
+            binding.movie = item
             with(binding) {
                 name.text = item.title
                 movieType.text = item.type
@@ -65,7 +72,7 @@ class MoviePagingAdapter(context: Context, private val listener: OnItemClickList
     }
 
     interface OnItemClickListenr {
-        fun onItemClick(movies: MovieData)
+        fun onItemClick(view: View, movies: MovieData)
     }
 
     private object MovieDiffItemCallback : DiffUtil.ItemCallback<MovieData>() {

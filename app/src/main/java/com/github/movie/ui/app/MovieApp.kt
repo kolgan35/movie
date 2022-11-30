@@ -1,12 +1,12 @@
-package com.github.movie.utils
+package com.github.movie.ui.app
 
 import android.app.Application
-import com.github.movie.data.database.Database
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class MovieApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Database.init(this)
     }
 }

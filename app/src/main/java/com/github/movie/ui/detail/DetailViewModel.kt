@@ -6,8 +6,11 @@ import androidx.lifecycle.ViewModel
 import com.github.movie.domain.models.RatingValue
 import com.github.movie.domain.repository.DetailMovieInfoRepository
 import com.github.movie.utils.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailViewModel(
+@HiltViewModel
+class DetailViewModel @Inject constructor(
     private val repo: DetailMovieInfoRepository
 ) : ViewModel() {
 
@@ -25,8 +28,6 @@ class DetailViewModel(
         }
     }
 }
-
-
 
 private fun emptyMovieDetailInfo(): MovieDetailInfo {
     return MovieDetailInfo(

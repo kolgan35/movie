@@ -1,15 +1,16 @@
 package com.github.movie.ui.downliaded_movies
 
-import android.util.Log
 import androidx.lifecycle.*
 import com.github.movie.data.entity.MovieEntity
-import com.github.movie.domain.repository.MovieRepository
+import com.github.movie.domain.repository.DownloadedMovieRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DownloadedMoviesViewModel(
-    private val repo: MovieRepository
+@HiltViewModel
+class DownloadedMoviesViewModel @Inject constructor(
+    private val repo: DownloadedMovieRepository
 ) : ViewModel() {
-
 
 
     private val movieMutableLiveData = MutableLiveData<List<MovieEntity>>()
@@ -18,7 +19,6 @@ class DownloadedMoviesViewModel(
         get() = movieMutableLiveData
 
     init {
-        Log.d("AAA", "ViewModel created")
         viewModelScope.launch {
             repo.listenerMovie().collect {
                 movieMutableLiveData.postValue(it)
@@ -26,8 +26,4 @@ class DownloadedMoviesViewModel(
         }
     }
 
-    override fun onCleared() {
-        Log.d("AAA", "ViewModel cleared")
-        super.onCleared()
-    }
 }

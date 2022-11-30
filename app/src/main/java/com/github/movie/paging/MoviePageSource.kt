@@ -10,15 +10,20 @@ import com.github.movie.data.networking.OmdbApi
 import com.github.movie.utils.movieConvertDataToEntity
 import com.github.movie.utils.movieConverter
 import com.squareup.moshi.JsonDataException
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import timber.log.Timber
 import java.lang.Exception
 
-class MoviePageSource(
+
+class MoviePageSource @AssistedInject constructor(
     private val db: MovieDatabase,
     private val api: OmdbApi,
-    private val query: String,
-    private val type: String
+    @Assisted("query") private val query: String,
+    @Assisted("type") private val type: String
 ) : PagingSource<Int, MovieData>() {
+
 
     override fun getRefreshKey(state: PagingState<Int, MovieData>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
@@ -66,6 +71,12 @@ class MoviePageSource(
             }
         }
     }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(@Assisted("query") query: String,
+        @Assisted("type") type: String): MoviePageSource
+    }
 }
 
 private fun emptyPage(): PagingSource.LoadResult<Int, MovieData> {
@@ -74,4 +85,6 @@ private fun emptyPage(): PagingSource.LoadResult<Int, MovieData> {
         prevKey = null,
         nextKey = null
     )
+
 }
+

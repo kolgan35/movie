@@ -5,4 +5,7 @@
     <string name="download_movies">DOWNLOADED MOVIES</string>
     <string name="series">Series</string>
     <string name="episode">Episode</string>
+    <string name="card_transition_name">cardTransitionName_%1$s</string>
+    <string name="detail_transition_name">detailTransition</string>
+
 </resources>

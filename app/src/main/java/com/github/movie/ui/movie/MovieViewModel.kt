@@ -6,20 +6,16 @@ import com.github.movie.data.database.MovieDatabase
 import com.github.movie.domain.models.MovieData
 import com.github.movie.data.networking.OmdbApi
 import com.github.movie.paging.MoviePageSource
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class MovieViewModel(
-    private val api: OmdbApi,
-    private val db: MovieDatabase
+@HiltViewModel
+class MovieViewModel @Inject constructor(
+    private val pageSource: MoviePageSource.Factory
 ) : ViewModel() {
 
-    private val _movie = MutableLiveData<PagingData<MovieData>>()
-
-    val movie: LiveData<PagingData<MovieData>>
-        get() = _movie
-
-    fun searchMovies(title: String, type: String) =
-        Pager(
-            PagingConfig(
+    fun searchMovies(title: String, type: String) = Pager(
+            config = PagingConfig(
                 pageSize = 10,
                 maxSize = 100,
                 enablePlaceholders = false,
@@ -27,7 +23,9 @@ class MovieViewModel(
                 prefetchDistance = 10
             ),
         ) {
-            MoviePageSource(db, api, title, type)
+            pageSource.create(title, type)
         }.liveData
             .cachedIn(viewModelScope)
+
+
 }

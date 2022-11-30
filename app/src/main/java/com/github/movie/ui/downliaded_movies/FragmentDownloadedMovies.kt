@@ -12,25 +12,25 @@ import com.github.movie.R
 import com.github.movie.adapter.MovieListAdapter
 import com.github.movie.databinding.FragmentDownloadedMoviesBinding
 import com.github.movie.utils.movieConverter
+import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
+@AndroidEntryPoint
 class FragmentDownloadedMovies : Fragment(R.layout.fragment_downloaded_movies) {
 
-    private val viewModel: DownloadedMoviesViewModel by viewModels {DownloadedMovieViewModelFactory()}
+    private val viewModel: DownloadedMoviesViewModel by viewModels()
     private var movieAdapter: MovieListAdapter by autoCleared()
     private val binding: FragmentDownloadedMoviesBinding by viewBinding(
         FragmentDownloadedMoviesBinding::bind
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        Log.d("AAA", "onViewCreated")
         super.onViewCreated(view, savedInstanceState)
         initList()
         viewModel.movieLiveData.observe(viewLifecycleOwner) {
             movieAdapter.items = it.movieConverter()
         }
 
-        Timber.d(movieAdapter.itemCount.toString())
 
         binding.upButton.setOnClickListener {
             binding.rv.smoothScrollToPosition(0)

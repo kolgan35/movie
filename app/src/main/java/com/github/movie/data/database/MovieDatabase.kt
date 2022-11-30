@@ -12,7 +12,7 @@ import com.github.movie.data.entity.MovieEntity
     ],
     version = 1
 )
-abstract class MovieDatabase: RoomDatabase() {
+abstract class MovieDatabase : RoomDatabase() {
 
     abstract fun movieDao(): MovieDao
 

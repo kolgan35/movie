@@ -3,9 +3,11 @@ package com.github.movie.ui.movie
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -16,16 +18,19 @@ import com.github.movie.domain.models.MovieType
 import com.github.movie.databinding.MoviewFragmentBinding
 import com.github.movie.utils.getMovieCheckedType
 import com.github.movie.utils.textChangedFlow
+import com.google.android.material.transition.MaterialElevationScale
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
+@AndroidEntryPoint
 class MovieFragment : Fragment(R.layout.moview_fragment), MoviePagingAdapter.OnItemClickListenr {
 
     private val binding: MoviewFragmentBinding by viewBinding(MoviewFragmentBinding::bind)
-    private val viewModel: MovieViewModel by viewModels { MovieViewModelFactory() }
+    private val viewModel by viewModels<MovieViewModel>()
     private val pagingAdapter by lazy(LazyThreadSafetyMode.NONE) {
         MoviePagingAdapter(requireContext(), this)
     }
@@ -36,6 +41,8 @@ class MovieFragment : Fragment(R.layout.moview_fragment), MoviePagingAdapter.OnI
         initList()
         Timber.d(pagingAdapter.itemCount.toString())
         search()
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
 
         binding.upButton.setOnClickListener {
             binding.recyclerView.smoothScrollToPosition(0)
@@ -43,7 +50,6 @@ class MovieFragment : Fragment(R.layout.moview_fragment), MoviePagingAdapter.OnI
     }
 
     private fun initList() {
-        Log.d("initList", "start initList")
         with(binding.recyclerView) {
             adapter = pagingAdapter
             layoutManager = LinearLayoutManager(requireContext())
@@ -52,7 +58,6 @@ class MovieFragment : Fragment(R.layout.moview_fragment), MoviePagingAdapter.OnI
     }
 
     private fun search() {
-        Log.d("search", "start searching")
         searchJob?.cancel()
         searchJob = lifecycleScope.launch {
             combine(
@@ -79,11 +84,25 @@ class MovieFragment : Fragment(R.layout.moview_fragment), MoviePagingAdapter.OnI
     }
 
 
-    override fun onItemClick(movies: MovieData) {
+    override fun onItemClick(view: View, movies: MovieData) {
+        val movieTransitionName = getString(R.string.detail_transition_name)
+        val extras = FragmentNavigatorExtras(view to movieTransitionName)
         findNavController().navigate(
             MovieFragmentDirections.actionFragmentMoviesToDetailFragment(
                 movies.id
-            )
+            ),
+            extras
         )
+
+        exitTransition = MaterialElevationScale(false).apply {
+            duration = CARD_DURATION
+        }
+        reenterTransition = MaterialElevationScale(true).apply {
+            duration = CARD_DURATION
+        }
+    }
+
+    companion object {
+        private const val CARD_DURATION = 500L
     }
 }
