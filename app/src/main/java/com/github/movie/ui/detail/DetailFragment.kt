@@ -27,6 +27,7 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val id = args.id
+        viewModel.loadPoster(this, args.posterUri, binding.image)
         bindInfo(id)
         observeLiveData()
         sharedElementEnterTransition = MaterialContainerTransform().apply {
@@ -38,34 +39,24 @@ class DetailFragment : Fragment(R.layout.detail_fragment) {
 
     @SuppressLint("SetTextI18n")
     private fun bindInfo(id: String) {
-
         lifecycleScope.launch {
             try {
                 viewModel.getInfo(id).apply {
-                    binding.movieTitle.text = this.title
-                    binding.genre.text = this.genre
-                    binding.year.text = this.year
-                    binding.runtime.text = this.runtime
-                    binding.rated.text = this.rated
+                    binding.setMovieTitle(this.title)
+                    binding.setGenre(this.genre)
+                    binding.setYear(this.year)
+                    binding.setRuntime(this.runtime)
+                    binding.setRated(this.rated)
                     val ratingString = this.rating.joinToString(
                         separator = ",\n",
                         transform = { "${it.source}: ${it.value}" }
                     )
-
-                    binding.rating.text = ratingString
-
-                    binding.plot.text = this.plot
-
-                    Glide.with(this@DetailFragment)
-                        .load(this.poster)
-                        .placeholder(R.drawable.ic_movie)
-                        .into(binding.image)
-
+                    binding.setRating(ratingString)
+                    binding.setPlot(this.plot)
                 }
             } catch (t: Throwable) {
                 toast("Отсутствует интернет-соединение")
             }
-
         }
     }
 

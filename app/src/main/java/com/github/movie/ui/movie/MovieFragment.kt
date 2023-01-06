@@ -89,7 +89,8 @@ class MovieFragment : Fragment(R.layout.moview_fragment), MoviePagingAdapter.OnI
         val extras = FragmentNavigatorExtras(view to movieTransitionName)
         findNavController().navigate(
             MovieFragmentDirections.actionFragmentMoviesToDetailFragment(
-                movies.id
+                movies.id,
+                movies.poster
             ),
             extras
         )
